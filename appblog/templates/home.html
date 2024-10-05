@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<form method="GET" action="">
+
+    <input type="text" name="q" value="" placeholder="search...">
+</form>
+<h5>hello {{request.user}}</h5>
+
+{% for person in persons  %}
+<div>
+    <a href="{% url 'profile' person.id %}"><img style="max-width: 300px;" src="{{ person.featured_image.url }}" alt="profile"></a>
+    <h5> <a href="{% url 'profile' person.id %}">{{person.name}}</a></h5> 
+    {% if request.user == person.user %}
+    <span><a href="{% url 'edit_post' person.id %}">Edit</a></span>
+    <a href="{% url 'delete_post'  person.id %}">Delete</a>
+    {% endif %}
+    <hr>
+</div>
+
+{% endfor %}
+
+
+
+
+{% endblock %}

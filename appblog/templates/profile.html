@@ -1,0 +1,48 @@
+{% extends 'base.html' %} {% block content %}
+
+<style>
+  .design {
+    display: grid;
+    grid-template-columns: 3fr 1fr;
+  }
+</style>
+
+<div class="design">
+  <div>
+    <img
+      style="max-width: 400px"
+      src="{{ persons.featured_image.url }}"
+      alt="profile"
+    />
+    <h4>{{persons.name}} -- {{persons.description}}</h4>
+
+    {% for room_message in room_messages %}
+    <div>
+      @{{room_message.user}} -- {{room_message.bio}} 
+      {% if request.user == room_message.user %}
+      <div>
+        <a href="{% url 'delete_message' room_message.id %}">Delete</a>
+        <!-- <a href="">Edit</a> -->
+      </div>
+      {% endif %}
+
+      <hr />
+    </div>
+
+    {% endfor %}
+
+    <form method="POST" action="">
+      {% csrf_token %}
+
+      <input type="text" name="body" placeholder="write a comment..." />
+    </form>
+  </div>
+
+  <div>
+    <h4>comments</h4>
+    <hr />
+  </div>
+  
+</div>
+
+{% endblock %}

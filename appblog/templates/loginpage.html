@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<form method="POST" action="">
+{% csrf_token %}
+<label for="username">username</label>
+<input type="text" name="username" placeholder="Enter username...">
+
+<label for="password">password</label>
+<input type="password" name="password" placeholder="Enter password...">
+
+<input type="submit" value="login">
+{% if messages %}
+<ul class="messages">
+    {% for message in messages %}
+    <li>{{ message }} </li>
+    {% endfor %}
+</ul>
+{% endif %}
+</form>
+<p>Haven't signed up yet? <a href="{% url 'registerpage' %}">sign up</a> </p>
+<a href="{% url 'reset_password' %}">forgot password?</a>
+
+{% endblock %}
